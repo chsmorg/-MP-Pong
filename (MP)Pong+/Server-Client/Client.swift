@@ -16,6 +16,11 @@ final class Client: ObservableObject{
     @Published var failed = false
     @Published var connectedPlayers: Int = 0
     @Published var status = ""
+    
+    @Published var gameJoined = false
+    @Published var gameConnected = false
+    @Published var playerNum = 0
+    @Published var connectedPlayer: ConnectedPlayer? = nil
    
     @Published var manager: SocketManager
     @Published var messages = [String]()
@@ -28,11 +33,11 @@ final class Client: ObservableObject{
         var manager: SocketManager
         switch serverType{
         case 1:
-            manager = SocketManager(socketURL: URL(string:"ws://192.168.0.19:3000")!, config: [.log(true), .compress])
+            manager = SocketManager(socketURL: URL(string:"ws://192.168.0.19:11328")!, config: [.log(true), .compress])
         case 2:
-            manager = SocketManager(socketURL: URL(string:"ws://localHost:3000")!, config: [.log(true), .compress])
+            manager = SocketManager(socketURL: URL(string:"ws://35.129.56.107:11328")!, config: [.log(true), .compress])
         default:
-            manager =  SocketManager(socketURL: URL(string:"ws://\(custom):3000")!, config: [.log(true), .compress])
+            manager =  SocketManager(socketURL: URL(string:"ws://\(custom):11328")!, config: [.log(true), .compress])
         }
         self.init(serverType: serverType, customIP: "", manager: manager)
     }
@@ -84,6 +89,25 @@ final class Client: ObservableObject{
                 }
             }
         }
+        socket.on("PlayerNum"){ [weak self](data, ack) in
+            if let data = data[0] as? [String: Int],
+               let number = data["Pnum"] {
+                DispatchQueue.main.async {
+                    self?.playerNum = number
+                    self?.gameConnected = true
+                }
+            }
+        }
+        socket.on("ConnectedPlayerName"){ [weak self](data, ack) in
+            if let data = data[0] as? [String: String],
+               let name = data["Pname"] {
+                DispatchQueue.main.async {
+                    self?.connectedPlayer = ConnectedPlayer(name: name)
+                    self?.connectedPlayer?.player = 2
+                }
+            }
+        }
+        
         
         socket.on("position"){ [weak self](data, ack) in
             if let data = data[0] as? [String: [Double]],
@@ -93,6 +117,7 @@ final class Client: ObservableObject{
                 }
             }
         }
+        
     }
     func updateList(){
         self.socket.emit("CheckPlayers")
@@ -105,8 +130,19 @@ final class Client: ObservableObject{
             self.failed = true
         })
     }
+    func join(index: Int, name: String){
+        self.socket.emit("join", [String(index),name])
+        self.gameJoined = true
+        
+    }
+    func playerConnected(name: String){
+        
+        
+        
+    }
     func disconnect(){
         self.socket.disconnect()
+        self.gameJoined = false
     }
     
                           

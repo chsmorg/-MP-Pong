@@ -21,6 +21,7 @@ class States: ObservableObject {
     @Published var rounds: Int = 5
     @Published var res: Float = 0.985
     //server info
+    @Published var joinedGame: Int? = nil
     @Published var connected: Bool = false
     @Published var status: String = ""
     @Published var connectedPlayers: Int = 0
@@ -42,9 +43,20 @@ class States: ObservableObject {
     func updateServerList(){
         self.server.socket.emit("CheckPlayers")
     }
-    
-    
-    
+    func connectPlayerToLobby(){
+        print(self.server.connectedPlayer)
+        if(self.playerList.count == 1 && server.connectedPlayer != nil){
+            self.addPlayer(player: server.connectedPlayer!)
+            print(self.playerList)
+        }
+        if(self.server.connectedPlayer == nil && self.playerList.count == 2){
+            self.removePlayerFromLobby()
+        }
+        
+    }
+    func removePlayerFromLobby(){
+        self.removePlayer(player: 2)
+    }
     
     func restartGame(){
         self.roundEnd = true
@@ -105,5 +117,7 @@ class States: ObservableObject {
             }
         }
     }
+    
+    
     
 }

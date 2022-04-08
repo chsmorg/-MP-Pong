@@ -9,6 +9,9 @@ import SwiftUI
 
 
 struct ServerListElement: View {
+    @ObservedObject var client: Client
+    @ObservedObject var states: States
+    @Binding var joining: Bool
     var bounds = UIScreen.main.bounds
     var serverNum: Int
     var connectedPayers: Int
@@ -23,8 +26,8 @@ struct ServerListElement: View {
                 }
                 Spacer()
                 HStack{
-                    Text("\(connectedPayers-1)/2").foregroundColor(connectedPayers-1 == 2 ? .red : .green).font(.system(size: 15, design: .rounded)).padding(.leading)
-                    Text(active ? "Playing": "Lobby").foregroundColor(active ? .red : .blue).font(.system(size: 15, design: .rounded))
+                    Text("\(connectedPayers)/2").foregroundColor(connectedPayers == 2 ? .red : .green).font(.system(size: 15, design: .rounded)).padding(.leading)
+                    Text(active ? "Playing": "Lobby").foregroundColor(active ? .red : .orange).font(.system(size: 15, design: .rounded))
                 }
             }
             Spacer()
@@ -36,6 +39,13 @@ struct ServerListElement: View {
         
         }.background(RoundedRectangle(cornerRadius: 20).fill(.quaternary).frame(width: UIScreen.main.bounds.width-50, height: bounds.height/9))
             .onTapGesture{
+                if(!client.gameJoined && connectedPayers < 2){
+                    client.join(index: serverNum, name: states.player.name)
+                    client.gameJoined = true
+                    states.joinedGame = serverNum
+                    joining = true
+                }
+                
             
             }
     }

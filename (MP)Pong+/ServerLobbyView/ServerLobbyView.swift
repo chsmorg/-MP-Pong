@@ -12,64 +12,58 @@ struct ServerLobbyView: View {
     @State var startUp = true
     @State var loading = true
     @State var connected = false
+    @State var joining = false
     @State var startUpText: String = "Connecting"
     @Binding var screen: Bool
     @State var timer = 150
     var body: some View {
-            ZStack{
-                
-                
-            
+                ZStack{
+                    if(states.joinedGame != nil){
+                        NavigationLink(destination: HostGameLobbyView(states: states, lobbyScreen: $joining, gameNum: states.joinedGame!), isActive: $joining) {
+                           EmptyView()
+                       
+                          }
+                    }
+                    
                     VStack{
                         
                         ServerInfoView(client: states.server, screen: $screen)
                        
                         //StatsView()
                         if(self.connected){
-                                ServerListView(client: states.server)
+                            ServerListView(client: states.server, states: states, joining: $joining)
                             
                            // LobbyButtonsView()
                             
                        }
-                        
-
                         Spacer()
 
                     }
-            
-                
-                
-                
-            }.background(.radialGradient(Gradient(colors: [.indigo, .blue, .purple]), center: .center, startRadius: 50, endRadius: 500)).onReceive(self.states.timer){_ in
-                if(self.states.server.connected){
-                    if(!self.states.server.serverList.isEmpty){
-                        self.connected = true
+
+                    
+                    
+                }.background(.radialGradient(Gradient(colors: [.indigo, .blue, .purple]), center: .center, startRadius: 50, endRadius: 500)).onReceive(self.states.timer){_ in
+                    if(self.states.server.connected ){
+                        if(!self.states.server.serverList.isEmpty){
+                            self.connected = true
+                        }
+                        timer -= 1
+                        if(timer <= 0){
+                            if(!self.joining){
+                                self.states.server.updateList()
+                            }
+                            
+                            timer = 150
+                            
+                        }
                     }
-                       
-                
-                   
-                    timer -= 1
-                    if(timer <= 0){
-                        self.states.server.updateList()
-                        timer = 150
-                        
+                    else{
+                        self.connected = false
+                        self.joining = false
                     }
                 }
-                else{
-                    self.connected = false
-                }
-                
-                
-            }
-            .onAppear(){
-                //states.connect()
-            }
-            .navigationBarTitle("")
-             .navigationBarHidden(true)
-                
-        
-        
-        
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
     }
 }
 

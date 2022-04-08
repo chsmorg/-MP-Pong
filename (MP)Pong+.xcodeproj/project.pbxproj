@@ -22,6 +22,9 @@
 		AB43140627FA639300E64430 /* ServerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43140527FA639300E64430 /* ServerInfoView.swift */; };
 		AB43140827FBA56000E64430 /* ServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43140727FBA56000E64430 /* ServerListView.swift */; };
 		AB43140A27FBA57B00E64430 /* ServerListElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43140927FBA57B00E64430 /* ServerListElement.swift */; };
+		AB43140D27FFE50200E64430 /* HostGameLobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43140C27FFE50200E64430 /* HostGameLobbyView.swift */; };
+		AB43140F27FFE54300E64430 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43140E27FFE54300E64430 /* PlayerView.swift */; };
+		AB43141127FFE5A100E64430 /* GameOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43141027FFE5A100E64430 /* GameOptionsView.swift */; };
 		ABE91EB527F794E80047D600 /* _MP_Pong_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE91EB427F794E80047D600 /* _MP_Pong_App.swift */; };
 		ABE91EB927F794E90047D600 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABE91EB827F794E90047D600 /* Assets.xcassets */; };
 		ABE91EBC27F794E90047D600 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABE91EBB27F794E90047D600 /* Preview Assets.xcassets */; };
@@ -62,6 +65,9 @@
 		AB43140527FA639300E64430 /* ServerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerInfoView.swift; sourceTree = "<group>"; };
 		AB43140727FBA56000E64430 /* ServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListView.swift; sourceTree = "<group>"; };
 		AB43140927FBA57B00E64430 /* ServerListElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListElement.swift; sourceTree = "<group>"; };
+		AB43140C27FFE50200E64430 /* HostGameLobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostGameLobbyView.swift; sourceTree = "<group>"; };
+		AB43140E27FFE54300E64430 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		AB43141027FFE5A100E64430 /* GameOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOptionsView.swift; sourceTree = "<group>"; };
 		ABE91EB127F794E80047D600 /* (MP)Pong+.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "(MP)Pong+.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE91EB427F794E80047D600 /* _MP_Pong_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _MP_Pong_App.swift; sourceTree = "<group>"; };
 		ABE91EB827F794E90047D600 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,6 +162,16 @@
 			path = ServerLobbyView;
 			sourceTree = "<group>";
 		};
+		AB43140B27FFE4E900E64430 /* GameLobbyViews */ = {
+			isa = PBXGroup;
+			children = (
+				AB43140C27FFE50200E64430 /* HostGameLobbyView.swift */,
+				AB43140E27FFE54300E64430 /* PlayerView.swift */,
+				AB43141027FFE5A100E64430 /* GameOptionsView.swift */,
+			);
+			path = GameLobbyViews;
+			sourceTree = "<group>";
+		};
 		ABE91EA827F794E80047D600 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +195,7 @@
 		ABE91EB327F794E80047D600 /* (MP)Pong+ */ = {
 			isa = PBXGroup;
 			children = (
+				AB43140B27FFE4E900E64430 /* GameLobbyViews */,
 				AB43140227FA622C00E64430 /* ServerLobbyView */,
 				AB4313B927F8F7E300E64430 /* ViewModels */,
 				AB4313B327F8F68900E64430 /* Server-Client */,
@@ -355,7 +372,9 @@
 				AB43139D27F7969A00E64430 /* AnimationView.swift in Sources */,
 				AB4313A127F7996100E64430 /* DropDownView.swift in Sources */,
 				AB43140627FA639300E64430 /* ServerInfoView.swift in Sources */,
+				AB43141127FFE5A100E64430 /* GameOptionsView.swift in Sources */,
 				AB4313A727F7A88600E64430 /* ServerTypeToggle.swift in Sources */,
+				AB43140F27FFE54300E64430 /* PlayerView.swift in Sources */,
 				AB4313BD27F8F7E300E64430 /* Player.swift in Sources */,
 				AB43139B27F795FB00E64430 /* StartPageView.swift in Sources */,
 				AB4313A527F7A82100E64430 /* GameTypeToggle.swift in Sources */,
@@ -365,6 +384,7 @@
 				AB4313BC27F8F7E300E64430 /* States.swift in Sources */,
 				AB43139F27F7972900E64430 /* Version.swift in Sources */,
 				ABE91EB527F794E80047D600 /* _MP_Pong_App.swift in Sources */,
+				AB43140D27FFE50200E64430 /* HostGameLobbyView.swift in Sources */,
 				AB43140A27FBA57B00E64430 /* ServerListElement.swift in Sources */,
 				AB4313AB27F7AC3700E64430 /* Client.swift in Sources */,
 			);

@@ -10,11 +10,13 @@ import SwiftUI
 
 struct ServerListView: View {
     @ObservedObject var client: Client
+    @ObservedObject var states: States
+    @Binding var joining: Bool
     var body: some View {
         ScrollView(.vertical, showsIndicators: false){
             ForEach(0...self.client.serverList.count-1 ,id: \.self){ index in
                 withAnimation(.easeIn(duration: 0.1)){
-                    ServerListElement(serverNum: index, connectedPayers: self.client.serverList[index], active: false).padding()
+                    ServerListElement(client: client, states: states, joining: $joining, serverNum: index, connectedPayers: self.client.serverList[index], active: false).padding()
                 }
                 
             }
