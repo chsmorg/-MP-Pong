@@ -16,6 +16,7 @@ struct HostGameLobbyView: View {
     @Binding var lobbyScreen: Bool
     @State var gameNum: Int
     @State var connectionStatus = "Joining..."
+    @State var timer = 0
     @State var joined = false
     @State var gameReady = false
     @State var gameStart = false
@@ -68,6 +69,7 @@ struct HostGameLobbyView: View {
                 .foregroundColor(.cyan).opacity(0.9)
                 .onReceive(self.states.timer){_ in
                     updateLobby()
+                    
                 }
                 .onChange(of: self.states.player.ready) { _ in
                     if(states.playerList.count == 2){
@@ -113,6 +115,10 @@ struct HostGameLobbyView: View {
         }
         
         else{
+            if(!states.server.connected){
+                states.exitLobby()
+                self.lobbyScreen = false
+            }
             self.joined = false
         }
     }
