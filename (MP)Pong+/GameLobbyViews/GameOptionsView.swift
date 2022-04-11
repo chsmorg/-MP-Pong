@@ -39,10 +39,15 @@ struct GameOptionsView: View{
             rounds = Double(states.rounds)
         }
         .onChange(of: states.rounds){ _ in
-            //Haptics.shared.play(.soft)
+            if(states.playerList.count == 2){
+                client.emitLobbyInfo(index: states.joinedGame!, ballSpeed: states.ballSpeed, rounds: states.rounds)
+            }
+            
         }
         .onChange(of: states.ballSpeed){ _ in
-            //Haptics.shared.play(.soft)
+            if(states.playerList.count == 2){
+                client.emitLobbyInfo(index: states.joinedGame!, ballSpeed: states.ballSpeed, rounds: states.rounds)
+            }
         }
 
             

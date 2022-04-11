@@ -27,6 +27,9 @@ final class Client: ObservableObject{
     @Published var serverList: [Int] = []
     
     @Published var location = CGPoint(x: 100, y: 200)
+    @Published var rounds: Int = 5
+    @Published var ballSpeed: Int = 15
+    
     @Published var socket: SocketIOClient
     
     convenience init(serverType: Int, custom: String){
@@ -98,6 +101,30 @@ final class Client: ObservableObject{
                 }
             }
         }
+        socket.on("LobbyInfo"){ [weak self](data, ack) in
+            if let data = data[0] as? [String: [Int]],
+               let info = data["info"] {
+                DispatchQueue.main.async {
+                    self?.ballSpeed = info[0]
+                    self?.rounds = info[1]
+                }
+            }
+        }
+        
+        socket.on("Ready"){ [weak self](data, ack) in
+            if let data = data[0] as? [String: Int],
+               let ready = data["Rstatus"] {
+                DispatchQueue.main.async {
+                    if(ready == 0){
+                        self?.connectedPlayer?.ready = false
+                    }
+                    else{
+                        self?.connectedPlayer?.ready = true
+                    }
+                    
+                }
+            }
+        }
         socket.on("ConnectedPlayerName"){ [weak self](data, ack) in
             if let data = data[0] as? [String: String],
                let name = data["Pname"] {
@@ -135,14 +162,28 @@ final class Client: ObservableObject{
         self.gameJoined = true
         
     }
-    func playerConnected(name: String){
-        
-        
-        
-    }
     func disconnect(){
         self.socket.disconnect()
         self.gameJoined = false
+    }
+    func emitHostInfo(index: Int, ballSpeed: Int, rounds: Int, name: String, ready: Bool){
+        var r = 0
+        if ready{
+            r = 1
+        }
+        self.socket.emit("joinAckName", [String(index), name])
+        self.socket.emit("lobbyInfo", [index,ballSpeed,rounds])
+        self.socket.emit("ready", [index, r])
+    }
+    func emitLobbyInfo(index: Int, ballSpeed: Int, rounds: Int){
+        self.socket.emit("lobbyInfo", [index,ballSpeed,rounds])
+    }
+    func emitReady(index: Int, ready: Bool){
+        var r = 0
+        if ready{
+            r = 1
+        }
+        self.socket.emit("ready", [index, r])
     }
     
                           

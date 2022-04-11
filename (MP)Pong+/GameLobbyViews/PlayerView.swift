@@ -10,6 +10,7 @@ import SwiftUI
 struct PlayerView: View {
     @ObservedObject var client: Client
     @ObservedObject var player: ConnectedPlayer
+    @ObservedObject var states: States
     @State var color = Color(.green)
     @State var ballColor = Color(.green)
     var body: some View{
@@ -28,6 +29,9 @@ struct PlayerView: View {
                     Button(action: {
                         if(self.player.ready==false) {player.setReady()}
                         else{ player.unReady()}
+                        if(client.connectedPlayer != nil){
+                            client.emitReady(index: states.joinedGame!, ready: self.player.ready)
+                        }
                     
                     },label: {
                         Text("Ready").padding()

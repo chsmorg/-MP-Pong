@@ -17,7 +17,6 @@ struct HostGameLobbyView: View {
     @State var gameNum: Int
     @State var connectionStatus = "Joining..."
     @State var joined = false
-    @State var timer = 150
     @State var gameReady = false
     @State var gameStart = false
     var body: some View {
@@ -26,7 +25,7 @@ struct HostGameLobbyView: View {
                     VStack{
                         ScrollView([], showsIndicators: false){
                             ForEach(0...states.playerList.count-1, id: \.self) { index in
-                                PlayerView(client: states.server, player: states.playerList[index])
+                                PlayerView(client: states.server, player: states.playerList[index], states: states)
                             }
                         }
                         GameOptionsView(states: states, client: states.server, player: states.player).padding()
@@ -69,6 +68,12 @@ struct HostGameLobbyView: View {
                 .onReceive(self.states.timer){_ in
                     updateLobby()
                 }
+                .onChange(of: self.states.player.ready) { _ in
+                    if(states.playerList.count == 2){
+                        states.server.emitReady(index: states.joinedGame!, ready: states.player.ready)
+                    }
+                    
+                }
     }
     
     
@@ -84,18 +89,19 @@ struct HostGameLobbyView: View {
             self.joined = true
             //ready status
             if(self.states.playerList.count == 2){
-                if(self.states.playerList[0].ready && self.states.playerList[1].ready){
+                if(self.states.playerList[1].ready && self.states.playerList[0].ready){
                     gameReady = true
                 }
                 else {gameReady = false}
             }
         
             states.connectPlayerToLobby()
-            //update timer
-            timer -= 1
-            if(timer <= 0){
-                timer = 150
+            if(!states.player.host){
+                states.rounds = states.server.rounds
+                states.ballSpeed = states.server.ballSpeed
             }
+        
+            
         }
         
         else{

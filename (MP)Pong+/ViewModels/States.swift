@@ -44,10 +44,12 @@ class States: ObservableObject {
         self.server.socket.emit("CheckPlayers")
     }
     func connectPlayerToLobby(){
-        print(self.server.connectedPlayer)
         if(self.playerList.count == 1 && server.connectedPlayer != nil){
             self.addPlayer(player: server.connectedPlayer!)
-            print(self.playerList)
+            if(self.player.host){
+                self.server.emitHostInfo(index: joinedGame!, ballSpeed: ballSpeed, rounds: rounds, name: player.name, ready: self.player.ready)
+            
+            }
         }
         if(self.server.connectedPlayer == nil && self.playerList.count == 2){
             self.removePlayerFromLobby()
