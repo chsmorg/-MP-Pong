@@ -14,17 +14,12 @@ class States: ObservableObject {
     @Published var player: ConnectedPlayer
     @Published var playerList: [ConnectedPlayer] = []
     @Published var server: Client
-    @Published var debug: Bool = false
-    @Published var gamePaused = false
     
     @Published var ballSpeed: Int = 10
     @Published var rounds: Int = 5
     @Published var res: Float = 0.985
     //server info
     @Published var joinedGame: Int? = nil
-    @Published var connected: Bool = false
-    @Published var status: String = ""
-    @Published var connectedPlayers: Int = 0
     @Published var gameEnd = false
     @Published var roundEnd = false
     //game timer
@@ -52,17 +47,14 @@ class States: ObservableObject {
             }
         }
         if(self.server.connectedPlayer == nil && self.playerList.count == 2){
-            self.removePlayerFromLobby()
+            self.removePlayer()
+            self.player.ready = false
         }
         
-    }
-    func removePlayerFromLobby(){
-        self.removePlayer(player: 2)
     }
     
     func restartGame(){
         self.roundEnd = true
-        self.gamePaused = false
         self.ballVelocity = simd_float2(x: 0, y: 0)
         
         for p in self.playerList{
@@ -76,7 +68,6 @@ class States: ObservableObject {
     func exitGame(){
         self.endRound(scored: 0)
         self.endGame(winner: 0)
-        self.gamePaused = false
     }
     func reset(){
         self.gameEnd = false
@@ -85,8 +76,20 @@ class States: ObservableObject {
     func addPlayer(player: ConnectedPlayer){
         self.playerList.append(player)
     }
-    func removePlayer(player: Int){
-        self.playerList.remove(at: player-1)
+    func exitLobby(){
+        self.removePlayer()
+        self.player.ready = false
+        if(self.inGame){
+            self.player.gameWon(win: false)
+        }
+        self.server.leaveLobby()
+        self.joinedGame = nil
+    }
+    func removePlayer(){
+        if(self.playerList.count == 2){
+            self.playerList.remove(at: 1)
+        }
+        
     }
     func newRound(){
         self.roundEnd = false

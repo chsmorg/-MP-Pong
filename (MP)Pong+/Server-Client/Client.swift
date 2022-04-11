@@ -10,22 +10,35 @@ import SwiftUI
 import SocketIO
 
 final class Client: ObservableObject{
+    ///server type when connecting to a server
     @Published var serverType: Int
+    ///custom server ip
     @Published var custom: String
+    ///ack when connected to a server
     @Published var connected = false
+    ///ack when failing to connect to a sercer
     @Published var failed = false
+    ///amount of players connected
     @Published var connectedPlayers: Int = 0
+    ///amount of servers active
+    @Published var serverList: [Int] = []
+    ///status of connection
     @Published var status = ""
-    
-    @Published var gameJoined = false
-    @Published var gameConnected = false
+    ///spot player connected in lobby
     @Published var playerNum = 0
+    
+    ///client side ack when joining a lobby
+    @Published var gameJoined = false
+    ///server ack when joining a lobby
+    @Published var gameConnected = false
+    ///current player connected to
     @Published var connectedPlayer: ConnectedPlayer? = nil
    
     @Published var manager: SocketManager
     @Published var messages = [String]()
-    @Published var serverList: [Int] = []
     
+    
+    ///defualt game info
     @Published var location = CGPoint(x: 100, y: 200)
     @Published var rounds: Int = 5
     @Published var ballSpeed: Int = 15
@@ -59,6 +72,9 @@ final class Client: ObservableObject{
         }
         socket.on(clientEvent: .disconnect){ (data, ack) in
             self.connected = false
+            self.connectedPlayer = nil
+            self.gameConnected = false
+            self.gameJoined = false
         }
         socket.on(clientEvent: .statusChange){ (data, ack) in
             self.status = self.socket.status.description
@@ -144,12 +160,25 @@ final class Client: ObservableObject{
                 }
             }
         }
+        socket.on("playerLeft"){ (data, ack) in
+            self.connectedPlayer = nil
+            if(self.playerNum == 2){
+                self.playerNum = 1
+            }
+        }
         
     }
     func updateList(){
         self.socket.emit("CheckPlayers")
         self.socket.emit("CheckServers")
-        print(self.serverList)
+    }
+    func leaveLobby(){
+        self.socket.emit("leave")
+        self.connectedPlayer = nil
+        
+        self.playerNum = 0
+        self.gameJoined = false
+        self.gameConnected = false
     }
     
     func connect(){

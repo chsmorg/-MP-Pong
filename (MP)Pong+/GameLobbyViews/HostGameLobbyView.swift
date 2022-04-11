@@ -23,6 +23,7 @@ struct HostGameLobbyView: View {
             ZStack{
                 if joined {
                     VStack{
+                        GameLobbyInfoView(states: states, screen: $lobbyScreen)
                         ScrollView([], showsIndicators: false){
                             ForEach(0...states.playerList.count-1, id: \.self) { index in
                                 PlayerView(client: states.server, player: states.playerList[index], states: states)
@@ -85,14 +86,21 @@ struct HostGameLobbyView: View {
             //setting lobby host
             if self.states.server.playerNum == 1{
                 self.states.player.host = true
+                
+            }
+            else{
+                self.states.player.host = false
             }
             self.joined = true
             //ready status
-            if(self.states.playerList.count == 2){
+            if(self.states.playerList.count == 2 && self.states.server.connectedPlayer != nil){
                 if(self.states.playerList[1].ready && self.states.playerList[0].ready){
                     gameReady = true
                 }
                 else {gameReady = false}
+            }
+            else{
+                gameReady = false
             }
         
             states.connectPlayerToLobby()
