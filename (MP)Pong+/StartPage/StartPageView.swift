@@ -24,6 +24,8 @@ struct StartPageView: View {
                 VStack{
                     ZStack{
                         DropDownView(lobbyType: $lobbyType, serverType: $serverType, customServer: $customServer).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3)
+                        DropDownServerView(lobbyType: $lobbyType, serverType: $serverType, customServer: $customServer).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3)
+                        
                         AnimationView().position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/7)
                         VStack{
                             if(lobby){

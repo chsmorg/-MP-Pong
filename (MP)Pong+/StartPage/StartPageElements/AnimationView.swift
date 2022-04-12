@@ -9,8 +9,8 @@ import SwiftUI
 
 
 private let b = UIScreen.main.bounds
-private let  c1Start = CGPoint(x: b.width/3.25 , y: b.height/2.8 - b.height/7)
-private let  c2Start = CGPoint(x: b.width/3.25 , y: b.height/2.8 + b.height/7)
+private let  c1Start = CGPoint(x: b.width/3.2 , y: b.height/2.4 - b.height/7)
+private let  c2Start = CGPoint(x: b.width/3.2 , y: b.height/2.4 + b.height/7)
 
 
 struct AnimationView: View {

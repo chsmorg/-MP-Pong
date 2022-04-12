@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB3FDD262806309800D7FE68 /* DropDownServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FDD252806309800D7FE68 /* DropDownServerView.swift */; };
 		AB43139B27F795FB00E64430 /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43139A27F795FB00E64430 /* StartPageView.swift */; };
 		AB43139D27F7969A00E64430 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43139C27F7969A00E64430 /* AnimationView.swift */; };
 		AB43139F27F7972900E64430 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43139E27F7972900E64430 /* Version.swift */; };
@@ -30,6 +31,15 @@
 		AB4D5003280530AA00CEF226 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D5002280530AA00CEF226 /* StatsView.swift */; };
 		AB4D50062805F3AA00CEF226 /* PlayerSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50052805F3AA00CEF226 /* PlayerSprite.swift */; };
 		AB4D50092805F43C00CEF226 /* GamePhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50082805F43C00CEF226 /* GamePhysics.swift */; };
+		AB4D500B2805F79A00CEF226 /* BallSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D500A2805F79A00CEF226 /* BallSprite.swift */; };
+		AB4D500D2805F7DB00CEF226 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D500C2805F7DB00CEF226 /* GameView.swift */; };
+		AB4D50112805F8B900CEF226 /* ScoreCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50102805F8B900CEF226 /* ScoreCounter.swift */; };
+		AB4D50132805F8ED00CEF226 /* InGameOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50122805F8ED00CEF226 /* InGameOptions.swift */; };
+		AB4D50152805F94100CEF226 /* ScoreCounterLayOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50142805F94100CEF226 /* ScoreCounterLayOut.swift */; };
+		AB4D50172805F96500CEF226 /* ScoreCounterDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50162805F96500CEF226 /* ScoreCounterDot.swift */; };
+		AB4D50192805F98600CEF226 /* GameCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50182805F98600CEF226 /* GameCircle.swift */; };
+		AB4D501B2805F9A700CEF226 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D501A2805F9A700CEF226 /* Line.swift */; };
+		AB4D501D2805F9C200CEF226 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D501C2805F9C200CEF226 /* Goal.swift */; };
 		ABE91EB527F794E80047D600 /* _MP_Pong_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE91EB427F794E80047D600 /* _MP_Pong_App.swift */; };
 		ABE91EB927F794E90047D600 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABE91EB827F794E90047D600 /* Assets.xcassets */; };
 		ABE91EBC27F794E90047D600 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABE91EBB27F794E90047D600 /* Preview Assets.xcassets */; };
@@ -56,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB3FDD252806309800D7FE68 /* DropDownServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownServerView.swift; sourceTree = "<group>"; };
 		AB43139A27F795FB00E64430 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
 		AB43139C27F7969A00E64430 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		AB43139E27F7972900E64430 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
@@ -78,6 +89,15 @@
 		AB4D5002280530AA00CEF226 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		AB4D50052805F3AA00CEF226 /* PlayerSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSprite.swift; sourceTree = "<group>"; };
 		AB4D50082805F43C00CEF226 /* GamePhysics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePhysics.swift; sourceTree = "<group>"; };
+		AB4D500A2805F79A00CEF226 /* BallSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallSprite.swift; sourceTree = "<group>"; };
+		AB4D500C2805F7DB00CEF226 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		AB4D50102805F8B900CEF226 /* ScoreCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCounter.swift; sourceTree = "<group>"; };
+		AB4D50122805F8ED00CEF226 /* InGameOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameOptions.swift; sourceTree = "<group>"; };
+		AB4D50142805F94100CEF226 /* ScoreCounterLayOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCounterLayOut.swift; sourceTree = "<group>"; };
+		AB4D50162805F96500CEF226 /* ScoreCounterDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCounterDot.swift; sourceTree = "<group>"; };
+		AB4D50182805F98600CEF226 /* GameCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCircle.swift; sourceTree = "<group>"; };
+		AB4D501A2805F9A700CEF226 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		AB4D501C2805F9C200CEF226 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		ABE91EB127F794E80047D600 /* (MP)Pong+.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "(MP)Pong+.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE91EB427F794E80047D600 /* _MP_Pong_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _MP_Pong_App.swift; sourceTree = "<group>"; };
 		ABE91EB827F794E90047D600 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -140,6 +160,7 @@
 				AB4313A827F7AB0300E64430 /* CustomIP.swift */,
 				AB4313A627F7A88600E64430 /* ServerTypeToggle.swift */,
 				AB4313A027F7996100E64430 /* DropDownView.swift */,
+				AB3FDD252806309800D7FE68 /* DropDownServerView.swift */,
 			);
 			path = DropDownMenu;
 			sourceTree = "<group>";
@@ -188,7 +209,10 @@
 		AB4D50042805F2D600CEF226 /* GameView */ = {
 			isa = PBXGroup;
 			children = (
+				AB4D500E2805F89800CEF226 /* GameElements */,
 				AB4D50052805F3AA00CEF226 /* PlayerSprite.swift */,
+				AB4D500A2805F79A00CEF226 /* BallSprite.swift */,
+				AB4D500C2805F7DB00CEF226 /* GameView.swift */,
 			);
 			path = GameView;
 			sourceTree = "<group>";
@@ -199,6 +223,28 @@
 				AB4D50082805F43C00CEF226 /* GamePhysics.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		AB4D500E2805F89800CEF226 /* GameElements */ = {
+			isa = PBXGroup;
+			children = (
+				AB4D500F2805F8A000CEF226 /* ScoreCounter */,
+				AB4D50182805F98600CEF226 /* GameCircle.swift */,
+				AB4D501A2805F9A700CEF226 /* Line.swift */,
+				AB4D501C2805F9C200CEF226 /* Goal.swift */,
+			);
+			path = GameElements;
+			sourceTree = "<group>";
+		};
+		AB4D500F2805F8A000CEF226 /* ScoreCounter */ = {
+			isa = PBXGroup;
+			children = (
+				AB4D50102805F8B900CEF226 /* ScoreCounter.swift */,
+				AB4D50122805F8ED00CEF226 /* InGameOptions.swift */,
+				AB4D50142805F94100CEF226 /* ScoreCounterLayOut.swift */,
+				AB4D50162805F96500CEF226 /* ScoreCounterDot.swift */,
+			);
+			path = ScoreCounter;
 			sourceTree = "<group>";
 		};
 		ABE91EA827F794E80047D600 = {
@@ -401,11 +447,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB43139D27F7969A00E64430 /* AnimationView.swift in Sources */,
+				AB4D50152805F94100CEF226 /* ScoreCounterLayOut.swift in Sources */,
 				AB4313A127F7996100E64430 /* DropDownView.swift in Sources */,
 				AB43140627FA639300E64430 /* ServerInfoView.swift in Sources */,
 				AB43141127FFE5A100E64430 /* GameOptionsView.swift in Sources */,
 				AB4313A727F7A88600E64430 /* ServerTypeToggle.swift in Sources */,
+				AB4D500B2805F79A00CEF226 /* BallSprite.swift in Sources */,
 				AB4D5003280530AA00CEF226 /* StatsView.swift in Sources */,
+				AB4D501D2805F9C200CEF226 /* Goal.swift in Sources */,
 				AB43140F27FFE54300E64430 /* PlayerView.swift in Sources */,
 				AB4313BD27F8F7E300E64430 /* Player.swift in Sources */,
 				AB43139B27F795FB00E64430 /* StartPageView.swift in Sources */,
@@ -413,12 +462,19 @@
 				AB4313A527F7A82100E64430 /* GameTypeToggle.swift in Sources */,
 				AB43140427FA624E00E64430 /* ServerLobbyView.swift in Sources */,
 				AB4313A927F7AB0300E64430 /* CustomIP.swift in Sources */,
+				AB4D50172805F96500CEF226 /* ScoreCounterDot.swift in Sources */,
+				AB3FDD262806309800D7FE68 /* DropDownServerView.swift in Sources */,
+				AB4D500D2805F7DB00CEF226 /* GameView.swift in Sources */,
+				AB4D50132805F8ED00CEF226 /* InGameOptions.swift in Sources */,
 				AB43140827FBA56000E64430 /* ServerListView.swift in Sources */,
+				AB4D50192805F98600CEF226 /* GameCircle.swift in Sources */,
 				AB4313BC27F8F7E300E64430 /* States.swift in Sources */,
+				AB4D501B2805F9A700CEF226 /* Line.swift in Sources */,
 				AB43139F27F7972900E64430 /* Version.swift in Sources */,
 				ABE91EB527F794E80047D600 /* _MP_Pong_App.swift in Sources */,
 				AB4AA72128049F1900BBE09A /* GameLobbyInfoView.swift in Sources */,
 				AB43140D27FFE50200E64430 /* HostGameLobbyView.swift in Sources */,
+				AB4D50112805F8B900CEF226 /* ScoreCounter.swift in Sources */,
 				AB43140A27FBA57B00E64430 /* ServerListElement.swift in Sources */,
 				AB4313AB27F7AC3700E64430 /* Client.swift in Sources */,
 				AB4D50092805F43C00CEF226 /* GamePhysics.swift in Sources */,

@@ -20,8 +20,14 @@ struct HostGameLobbyView: View {
     @State var joined = false
     @State var gameReady = false
     @State var gameStart = false
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
             ZStack{
+                
+                NavigationLink(destination: GameView(states: states), isActive: $gameStart) {
+                        EmptyView()
+                }
+                
                 if joined {
                     VStack{
                         GameLobbyInfoView(states: states, screen: $lobbyScreen)
@@ -82,6 +88,11 @@ struct HostGameLobbyView: View {
     
     
     func updateLobby(){
+        if(!states.server.connected){
+            states.exitLobby()
+            self.lobbyScreen = false
+            self.presentationMode.wrappedValue.dismiss()
+        }
         
         //connection status
         if(states.server.gameConnected && states.server.playerNum != 0){
@@ -115,10 +126,6 @@ struct HostGameLobbyView: View {
         }
         
         else{
-            if(!states.server.connected){
-                states.exitLobby()
-                self.lobbyScreen = false
-            }
             self.joined = false
         }
     }

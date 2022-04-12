@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-
-import SwiftUI
 import AVFoundation
 
 struct PlayerSprite: View {
@@ -39,12 +37,7 @@ struct PlayerSprite: View {
             .gesture(
                 simpleDrag
             ).onAppear(){
-                if(self.player.player == 1){
-                    side = bounds.height/2+30
-                }
-                else{
-                    side = bounds.height/2-30
-                }
+                side = bounds.height/2+30
             }.onReceive(self.states.timer){ _ in
                     physics.update()
                 
