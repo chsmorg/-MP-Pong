@@ -26,6 +26,10 @@
 		AB43140F27FFE54300E64430 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43140E27FFE54300E64430 /* PlayerView.swift */; };
 		AB43141127FFE5A100E64430 /* GameOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43141027FFE5A100E64430 /* GameOptionsView.swift */; };
 		AB4AA72128049F1900BBE09A /* GameLobbyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4AA72028049F1900BBE09A /* GameLobbyInfoView.swift */; };
+		AB4D50012805157F00CEF226 /* LobbyButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50002805157F00CEF226 /* LobbyButtonsView.swift */; };
+		AB4D5003280530AA00CEF226 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D5002280530AA00CEF226 /* StatsView.swift */; };
+		AB4D50062805F3AA00CEF226 /* PlayerSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50052805F3AA00CEF226 /* PlayerSprite.swift */; };
+		AB4D50092805F43C00CEF226 /* GamePhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4D50082805F43C00CEF226 /* GamePhysics.swift */; };
 		ABE91EB527F794E80047D600 /* _MP_Pong_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE91EB427F794E80047D600 /* _MP_Pong_App.swift */; };
 		ABE91EB927F794E90047D600 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABE91EB827F794E90047D600 /* Assets.xcassets */; };
 		ABE91EBC27F794E90047D600 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABE91EBB27F794E90047D600 /* Preview Assets.xcassets */; };
@@ -70,6 +74,10 @@
 		AB43140E27FFE54300E64430 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		AB43141027FFE5A100E64430 /* GameOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOptionsView.swift; sourceTree = "<group>"; };
 		AB4AA72028049F1900BBE09A /* GameLobbyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLobbyInfoView.swift; sourceTree = "<group>"; };
+		AB4D50002805157F00CEF226 /* LobbyButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyButtonsView.swift; sourceTree = "<group>"; };
+		AB4D5002280530AA00CEF226 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		AB4D50052805F3AA00CEF226 /* PlayerSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSprite.swift; sourceTree = "<group>"; };
+		AB4D50082805F43C00CEF226 /* GamePhysics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePhysics.swift; sourceTree = "<group>"; };
 		ABE91EB127F794E80047D600 /* (MP)Pong+.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "(MP)Pong+.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABE91EB427F794E80047D600 /* _MP_Pong_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _MP_Pong_App.swift; sourceTree = "<group>"; };
 		ABE91EB827F794E90047D600 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,6 +168,8 @@
 				AB43140527FA639300E64430 /* ServerInfoView.swift */,
 				AB43140727FBA56000E64430 /* ServerListView.swift */,
 				AB43140927FBA57B00E64430 /* ServerListElement.swift */,
+				AB4D50002805157F00CEF226 /* LobbyButtonsView.swift */,
+				AB4D5002280530AA00CEF226 /* StatsView.swift */,
 			);
 			path = ServerLobbyView;
 			sourceTree = "<group>";
@@ -173,6 +183,22 @@
 				AB4AA72028049F1900BBE09A /* GameLobbyInfoView.swift */,
 			);
 			path = GameLobbyViews;
+			sourceTree = "<group>";
+		};
+		AB4D50042805F2D600CEF226 /* GameView */ = {
+			isa = PBXGroup;
+			children = (
+				AB4D50052805F3AA00CEF226 /* PlayerSprite.swift */,
+			);
+			path = GameView;
+			sourceTree = "<group>";
+		};
+		AB4D50072805F41600CEF226 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AB4D50082805F43C00CEF226 /* GamePhysics.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		ABE91EA827F794E80047D600 = {
@@ -198,6 +224,8 @@
 		ABE91EB327F794E80047D600 /* (MP)Pong+ */ = {
 			isa = PBXGroup;
 			children = (
+				AB4D50072805F41600CEF226 /* Models */,
+				AB4D50042805F2D600CEF226 /* GameView */,
 				AB43140B27FFE4E900E64430 /* GameLobbyViews */,
 				AB43140227FA622C00E64430 /* ServerLobbyView */,
 				AB4313B927F8F7E300E64430 /* ViewModels */,
@@ -377,9 +405,11 @@
 				AB43140627FA639300E64430 /* ServerInfoView.swift in Sources */,
 				AB43141127FFE5A100E64430 /* GameOptionsView.swift in Sources */,
 				AB4313A727F7A88600E64430 /* ServerTypeToggle.swift in Sources */,
+				AB4D5003280530AA00CEF226 /* StatsView.swift in Sources */,
 				AB43140F27FFE54300E64430 /* PlayerView.swift in Sources */,
 				AB4313BD27F8F7E300E64430 /* Player.swift in Sources */,
 				AB43139B27F795FB00E64430 /* StartPageView.swift in Sources */,
+				AB4D50062805F3AA00CEF226 /* PlayerSprite.swift in Sources */,
 				AB4313A527F7A82100E64430 /* GameTypeToggle.swift in Sources */,
 				AB43140427FA624E00E64430 /* ServerLobbyView.swift in Sources */,
 				AB4313A927F7AB0300E64430 /* CustomIP.swift in Sources */,
@@ -391,6 +421,8 @@
 				AB43140D27FFE50200E64430 /* HostGameLobbyView.swift in Sources */,
 				AB43140A27FBA57B00E64430 /* ServerListElement.swift in Sources */,
 				AB4313AB27F7AC3700E64430 /* Client.swift in Sources */,
+				AB4D50092805F43C00CEF226 /* GamePhysics.swift in Sources */,
+				AB4D50012805157F00CEF226 /* LobbyButtonsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

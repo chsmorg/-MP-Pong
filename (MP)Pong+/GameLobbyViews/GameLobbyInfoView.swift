@@ -27,9 +27,10 @@ struct GameLobbyInfoView: View {
                     Image(systemName: "arrowshape.turn.up.backward.circle").font(.system(size: 25, design: .rounded)).padding(.leading, 40)
                         .foregroundColor(.red)
                 }).opacity(0.8)
-                Spacer()
+                
                 Text("Game Lobby: \((states.joinedGame ?? 0)+1)").foregroundColor( .green).font(.system(size: 20, design: .rounded)).padding(.horizontal)
                 Spacer()
+                
                     
 
         

@@ -28,12 +28,14 @@ struct ServerLobbyView: View {
                     VStack{
                         
                         ServerInfoView(client: states.server, screen: $screen)
+                        StatsView(states: states)
                        
                         //StatsView()
                         if(self.connected){
+                            LobbyButtonsView(states: states, client: states.server, joining: $joining)
                             ServerListView(client: states.server, states: states, joining: $joining)
                             
-                           // LobbyButtonsView()
+                           //LobbyButtonsView()
                             
                        }
                         Spacer()

@@ -33,6 +33,8 @@ final class Client: ObservableObject{
     @Published var gameConnected = false
     ///current player connected to
     @Published var connectedPlayer: ConnectedPlayer? = nil
+    
+    @Published var ping = 0
    
     @Published var manager: SocketManager
     @Published var messages = [String]()
@@ -49,9 +51,11 @@ final class Client: ObservableObject{
         var manager: SocketManager
         switch serverType{
         case 1:
+            //192.168.0.19
             manager = SocketManager(socketURL: URL(string:"ws://192.168.0.19:11328")!, config: [.log(true), .compress])
         case 2:
-            manager = SocketManager(socketURL: URL(string:"ws://35.129.56.107:11328")!, config: [.log(true), .compress])
+            //35.129.56.107
+            manager = SocketManager(socketURL: URL(string:"ws:localhost//:11328")!, config: [.log(true), .compress])
         default:
             manager =  SocketManager(socketURL: URL(string:"ws://\(custom):11328")!, config: [.log(true), .compress])
         }
@@ -83,7 +87,9 @@ final class Client: ObservableObject{
             self.status = self.socket.status.description
             self.disconnect()
         }
-       
+        socket.on(clientEvent: .pong){ (data, ack) in
+            
+        }
         socket.on("ActiveServers"){ [weak self](data, ack) in
             if let data = data[0] as? [String: [Int]],
                let servers = data["SInfo"] {
@@ -92,6 +98,7 @@ final class Client: ObservableObject{
                 }
             }
         }
+        
         socket.on("ActivePlayers"){ [weak self](data, ack) in
             if let data = data[0] as? [String: Int],
                let players = data["PInfo"] {

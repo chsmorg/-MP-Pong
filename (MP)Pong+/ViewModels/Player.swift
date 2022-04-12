@@ -13,6 +13,7 @@ class ConnectedPlayer: ObservableObject{
     
     var name: String
     @Published var wins: Int = 0
+    @Published var gamesPlayed: Int = 0
     @Published var streak: Int = 0
     @Published var score: Int = 0
     @Published var host: Bool = false

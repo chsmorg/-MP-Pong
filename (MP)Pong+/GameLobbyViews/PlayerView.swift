@@ -26,20 +26,26 @@ struct PlayerView: View {
                     Text("Player").padding(.vertical).font(.system(size: 12)).foregroundColor(.green)
                 }
                 ZStack{
-                    Button(action: {
-                        if(self.player.ready==false) {player.setReady()}
-                        else{ player.unReady()}
-                        if(client.connectedPlayer != nil){
-                            client.emitReady(index: states.joinedGame!, ready: self.player.ready)
-                        }
-                    
-                    },label: {
-                        Text("Ready").padding()
-                            .foregroundColor(self.player.ready ? .green: .red)
-                            .cornerRadius(15)
+                    HStack{
+                        Button(action: {
+                            if(self.player.ready==false) {player.setReady()}
+                            else{ player.unReady()}
+                            if(client.connectedPlayer != nil){
+                                client.emitReady(index: states.joinedGame!, ready: self.player.ready)
+                            }
+                        
+                        },label: {
+                            Text("Ready").padding(.vertical)
+                                .foregroundColor(self.player.ready ? .green: .red)
+                                .cornerRadius(15)
+                                .font(.system(size: 15))
+                               
+                        }).disabled(player.player == 1 ? false : true)
+                        Image(systemName: self.player.ready ? "checkmark.circle.fill" : "checkmark.circle")
                             .font(.system(size: 15))
-                           
-                    }).disabled(player.player == 1 ? false : true)
+                            .foregroundColor(self.player.ready ? .green : .red)
+                    }
+                    
                 }
             }
             Spacer()

@@ -43,8 +43,6 @@ struct ServerInfoView: View {
             }
             Divider()
             if(self.client.connected){
-                
-            
                 HStack{
                     Text("Active Players: \(self.client.connectedPlayers) ").foregroundColor(.cyan).padding(.leading).font(.system(size: 15, design: .rounded)).padding(.horizontal)
                     Spacer()
