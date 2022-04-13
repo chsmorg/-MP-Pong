@@ -19,7 +19,9 @@ struct StatsView: View {
                     Text("Win Rate \(String(format: "%.2f" ,Double(states.player.wins)/Double(states.player.gamesPlayed)*100))%").foregroundColor(.cyan).font(.system(size: 15, design: .rounded)).padding(.horizontal)
                 }
                 
+                
             }
+            Divider()
         }
         
     }

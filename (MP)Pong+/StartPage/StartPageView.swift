@@ -15,6 +15,7 @@ struct StartPageView: View {
     @State var lobbyType: Int = 1
     @State var serverType: Int = 1
     @State var customServer: String = ""
+    @State var settingsVis = true
     @State var statusText = ""
     @State var lobby = false
     @State var connected = false
@@ -23,8 +24,8 @@ struct StartPageView: View {
         NavigationView{
                 VStack{
                     ZStack{
-                        DropDownView(lobbyType: $lobbyType, serverType: $serverType, customServer: $customServer).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3)
-                        DropDownServerView(lobbyType: $lobbyType, serverType: $serverType, customServer: $customServer).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3)
+                        DropDownView(lobbyType: $lobbyType, serverType: $serverType, customServer: $customServer).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3).opacity(settingsVis ? 1 : 0)
+                        DropDownServerView(lobbyType: $lobbyType, serverType: $serverType, customServer: $customServer).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3).opacity(settingsVis ? 1 : 0)
                         
                         AnimationView().position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/7)
                         VStack{
@@ -49,13 +50,19 @@ struct StartPageView: View {
                                 .keyboardType(.default)
                                 .disableAutocorrection(true)
                                 .foregroundColor(.white)
-                                .onSubmit{ 
+                                .onSubmit{
+                                    self.settingsVis = true
                                     if(!name.isEmpty && name.count >= 3 && name.count <= 8){
                                         validName = true
                                     }
                                     else{
                                         validName = false
                                     }
+                                }.onTapGesture {
+                                    withAnimation(.spring()){
+                                        self.settingsVis = false
+                                    }
+                                    
                                 }
                             
                             

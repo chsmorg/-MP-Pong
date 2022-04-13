@@ -28,14 +28,14 @@ struct ServerLobbyView: View {
                     VStack{
                         
                         ServerInfoView(client: states.server, screen: $screen)
-                        StatsView(states: states)
+                        
                        
-                        //StatsView()
+                    
                         if(self.connected){
+                            StatsView(states: states)
                             LobbyButtonsView(states: states, client: states.server, joining: $joining)
                             ServerListView(client: states.server, states: states, joining: $joining)
                             
-                           //LobbyButtonsView()
                             
                        }
                         Spacer()
@@ -68,4 +68,6 @@ struct ServerLobbyView: View {
                 .navigationBarHidden(true)
     }
 }
+
+
 

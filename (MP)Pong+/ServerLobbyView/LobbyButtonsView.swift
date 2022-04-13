@@ -12,6 +12,7 @@ struct LobbyButtonsView: View {
     @ObservedObject var client: Client
     @Binding var joining: Bool
     @State var invites: Int = 0
+    @State var vis: Double = 0
     var body: some View {
         HStack{
             Button(action: {
@@ -35,7 +36,11 @@ struct LobbyButtonsView: View {
                         .foregroundColor(.cyan)
                         .frame(height: 40))
                    
-            }).padding().opacity(0.8)
+            }).padding().opacity(self.vis).onAppear(){
+                withAnimation(.easeIn.speed(0.6)){
+                    self.vis = 0.8
+                }
+            }
             
             Button(action: {
                 client.updateList()
@@ -58,7 +63,11 @@ struct LobbyButtonsView: View {
                         .foregroundColor(.cyan)
                         .frame(height: 40))
                    
-            }).padding().opacity(0.8)
+            }).padding().opacity(self.vis).onAppear(){
+                withAnimation(.easeIn.speed(0.6)){
+                    self.vis = 0.8
+                }
+            }
         }
     }
 }

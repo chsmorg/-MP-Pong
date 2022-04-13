@@ -29,7 +29,7 @@ struct DropDownServerView: View {
                 }
                 if expand{
                     VStack{
-                            if(lobbyType == 1){
+                            
                                 Text("Server Connect:").font(.system(size:13, weight: .regular, design: .rounded))
                                   .foregroundColor(Color(UIColor.lightGray))
                                         withAnimation(.spring()){
@@ -41,8 +41,6 @@ struct DropDownServerView: View {
                                              CustomIP(customIP: $customServer)
                                             }
                                         }
-                        
-                                    }
                     }
                 }
                 

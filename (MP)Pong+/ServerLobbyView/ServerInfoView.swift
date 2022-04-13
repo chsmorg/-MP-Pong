@@ -10,6 +10,8 @@ import SwiftUI
 struct ServerInfoView: View {
     @ObservedObject var client: Client
     @Binding var screen: Bool
+    @State var connected = false
+    
     var body: some View {
         VStack{
             HStack{
@@ -24,25 +26,23 @@ struct ServerInfoView: View {
                         .foregroundColor(.red)
                 }).opacity(0.8)
                 Spacer()
-                Text(self.client.connected ? "Connected": "Disconnected").foregroundColor(self.client.connected ? .green: .red).font(.system(size: 20, design: .rounded)).padding(.horizontal)
-                Image(systemName: self.client.connected ? "point.3.filled.connected.trianglepath.dotted": "point.3.connected.trianglepath.dotted")
+                Text(self.connected ? "Connected": "Disconnected").foregroundColor(self.connected ? .green: .red).font(.system(size: 20, design: .rounded)).padding(.horizontal)
+                Image(systemName: self.connected ? "wifi": "wifi.slash")
                     .font(.system(size: 25, design: .rounded))
-                    .foregroundColor(self.client.connected ? .green : .red)
+                    .foregroundColor(self.connected ? .green : .red)
                 Spacer()
                     Button(action: {
-                        withAnimation(.spring()){
-                            self.client.connect()
-                        }
+                        self.client.connect()
                         
                     },label: {
                         Image(systemName: "arrow.clockwise").font(.system(size: 25, design: .rounded))
                             .foregroundColor(.teal).padding(.trailing, 40)
-                    }).opacity(!self.client.connected ? 0.8 : 0)
+                    }).opacity(!self.connected ? 0.8 : 0)
 
         
             }
             Divider()
-            if(self.client.connected){
+            if(self.connected){
                 HStack{
                     Text("Active Players: \(self.client.connectedPlayers) ").foregroundColor(.cyan).padding(.leading).font(.system(size: 15, design: .rounded)).padding(.horizontal)
                     Spacer()
@@ -56,6 +56,11 @@ struct ServerInfoView: View {
                 }
             }
             Divider()
+            
+        }.onChange(of: self.client.connected){_ in
+            withAnimation(.spring()){
+                self.connected.toggle()
+            }
             
         }
         
