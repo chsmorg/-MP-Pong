@@ -55,6 +55,10 @@ struct GameView: View {
             states.roundEnd = true
               
         }.background(.radialGradient(Gradient(colors: [.indigo, .blue, .purple]), center: .center, startRadius: 50, endRadius: 500)).onReceive(self.states.timer){ _ in
+            if(self.states.server.connectedPlayer == nil){
+                states.exitGame()
+                states.player.ready = false
+            }
             if(self.states.roundEnd){
                 if(self.states.gameEnd){self.presentationMode.wrappedValue.dismiss()}
                 self.roundTimer -= 1

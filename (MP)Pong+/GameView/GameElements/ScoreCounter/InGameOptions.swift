@@ -51,6 +51,7 @@ struct InGameOptions: View {
                     }).padding()
                     Button(action: {
                             states.exitGame()
+                            states.exitLobby()
                         
                         
                     },label: {

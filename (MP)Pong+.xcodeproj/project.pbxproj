@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AB3FDD262806309800D7FE68 /* DropDownServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FDD252806309800D7FE68 /* DropDownServerView.swift */; };
+		AB3FDD2828069E3900D7FE68 /* ConnectedPlayerSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FDD2728069E3900D7FE68 /* ConnectedPlayerSprite.swift */; };
+		AB3FDD2A28069EEB00D7FE68 /* ConnectedBallSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3FDD2928069EEB00D7FE68 /* ConnectedBallSprite.swift */; };
 		AB43139B27F795FB00E64430 /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43139A27F795FB00E64430 /* StartPageView.swift */; };
 		AB43139D27F7969A00E64430 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43139C27F7969A00E64430 /* AnimationView.swift */; };
 		AB43139F27F7972900E64430 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB43139E27F7972900E64430 /* Version.swift */; };
@@ -67,6 +69,8 @@
 
 /* Begin PBXFileReference section */
 		AB3FDD252806309800D7FE68 /* DropDownServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownServerView.swift; sourceTree = "<group>"; };
+		AB3FDD2728069E3900D7FE68 /* ConnectedPlayerSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedPlayerSprite.swift; sourceTree = "<group>"; };
+		AB3FDD2928069EEB00D7FE68 /* ConnectedBallSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedBallSprite.swift; sourceTree = "<group>"; };
 		AB43139A27F795FB00E64430 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
 		AB43139C27F7969A00E64430 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		AB43139E27F7972900E64430 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
@@ -211,6 +215,8 @@
 			children = (
 				AB4D500E2805F89800CEF226 /* GameElements */,
 				AB4D50052805F3AA00CEF226 /* PlayerSprite.swift */,
+				AB3FDD2728069E3900D7FE68 /* ConnectedPlayerSprite.swift */,
+				AB3FDD2928069EEB00D7FE68 /* ConnectedBallSprite.swift */,
 				AB4D500A2805F79A00CEF226 /* BallSprite.swift */,
 				AB4D500C2805F7DB00CEF226 /* GameView.swift */,
 			);
@@ -457,6 +463,7 @@
 				AB4D501D2805F9C200CEF226 /* Goal.swift in Sources */,
 				AB43140F27FFE54300E64430 /* PlayerView.swift in Sources */,
 				AB4313BD27F8F7E300E64430 /* Player.swift in Sources */,
+				AB3FDD2A28069EEB00D7FE68 /* ConnectedBallSprite.swift in Sources */,
 				AB43139B27F795FB00E64430 /* StartPageView.swift in Sources */,
 				AB4D50062805F3AA00CEF226 /* PlayerSprite.swift in Sources */,
 				AB4313A527F7A82100E64430 /* GameTypeToggle.swift in Sources */,
@@ -473,6 +480,7 @@
 				AB43139F27F7972900E64430 /* Version.swift in Sources */,
 				ABE91EB527F794E80047D600 /* _MP_Pong_App.swift in Sources */,
 				AB4AA72128049F1900BBE09A /* GameLobbyInfoView.swift in Sources */,
+				AB3FDD2828069E3900D7FE68 /* ConnectedPlayerSprite.swift in Sources */,
 				AB43140D27FFE50200E64430 /* HostGameLobbyView.swift in Sources */,
 				AB4D50112805F8B900CEF226 /* ScoreCounter.swift in Sources */,
 				AB43140A27FBA57B00E64430 /* ServerListElement.swift in Sources */,

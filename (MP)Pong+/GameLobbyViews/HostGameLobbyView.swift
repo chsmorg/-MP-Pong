@@ -46,8 +46,7 @@ struct HostGameLobbyView: View {
                     }
                     if(states.player.host){
                         Button(action:{
-                            gameStart = true
-                            states.reset()
+                            states.server.startGame(start: true, index: states.joinedGame!)
                         },label:{
                             Text("Start Game")
                                 .padding(15)
@@ -83,7 +82,7 @@ struct HostGameLobbyView: View {
                     updateLobby()
                     
                 }
-                .onChange(of: self.states.player.ready) { _ in
+                .onChange(of: self.states.player.ready || self.states.server.gameStart) { _ in
                     if(states.playerList.count == 2){
                         states.server.emitReady(index: states.joinedGame!, ready: states.player.ready)
                     }
@@ -98,6 +97,14 @@ struct HostGameLobbyView: View {
             states.exitLobby()
             self.lobbyScreen = false
             self.presentationMode.wrappedValue.dismiss()
+        }
+        if states.joinedGame == nil{
+            self.lobbyScreen = false
+            self.presentationMode.wrappedValue.dismiss()
+        }
+        if !self.gameStart && states.server.gameStart{
+            gameStart = states.server.gameStart
+            states.reset()
         }
         
         //connection status

@@ -66,6 +66,7 @@ class States: ObservableObject {
         self.ballPosition = point
     }
     func exitGame(){
+        self.server.gameStart = false
         self.endRound(scored: 0)
         self.endGame(winner: 0)
     }
@@ -77,6 +78,7 @@ class States: ObservableObject {
         self.playerList.append(player)
     }
     func exitLobby(){
+        self.server.gameStart = false
         self.removePlayer()
         self.player.ready = false
         if(self.inGame){

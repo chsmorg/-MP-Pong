@@ -34,10 +34,9 @@ final class Client: ObservableObject{
     ///current player connected to
     @Published var connectedPlayer: ConnectedPlayer? = nil
     
-    @Published var ping = 0
+    @Published var gameStart = false
    
     @Published var manager: SocketManager
-    @Published var messages = [String]()
     
     
     ///defualt game info
@@ -75,10 +74,7 @@ final class Client: ObservableObject{
             self.connected = true
         }
         socket.on(clientEvent: .disconnect){ (data, ack) in
-            self.connected = false
-            self.connectedPlayer = nil
-            self.gameConnected = false
-            self.gameJoined = false
+            self.reset()
         }
         socket.on(clientEvent: .statusChange){ (data, ack) in
             self.status = self.socket.status.description
@@ -107,12 +103,17 @@ final class Client: ObservableObject{
                 }
             }
         }
-        socket.on("testmmsg"){ [weak self](data, ack) in
-            if let data = data[0] as? [String: String],
-               let rawMessage = data["msg"] {
+        socket.on("GameStart"){ [weak self](data, ack) in
+            if let data = data[0] as? [String: [Bool]],
+               let start = data["start"] {
                 DispatchQueue.main.async {
-                    self?.messages.append (rawMessage)
+                    self?.gameStart = start[0]
                 }
+            }
+        }
+        socket.on("GameStartAck"){[weak self] _,_ in
+            DispatchQueue.main.async {
+                self?.gameStart = true
             }
         }
         socket.on("PlayerNum"){ [weak self](data, ack) in
@@ -172,12 +173,22 @@ final class Client: ObservableObject{
             if(self.playerNum == 2){
                 self.playerNum = 1
             }
+            if(self.gameStart){
+                self.gameStart = false
+            }
         }
         
     }
     func updateList(){
         self.socket.emit("CheckPlayers")
         self.socket.emit("CheckServers")
+    }
+    func reset(){
+        self.connected = false
+        self.connectedPlayer = nil
+        self.gameConnected = false
+        self.gameJoined = false
+        self.gameStart = false
     }
     func leaveLobby(){
         self.socket.emit("leave")
@@ -198,9 +209,11 @@ final class Client: ObservableObject{
         self.gameJoined = true
         
     }
+    func startGame(start: Bool, index: Int){
+        self.socket.emit("GameStart", [index, start])
+    }
     func disconnect(){
         self.socket.disconnect()
-        self.gameJoined = false
     }
     func emitHostInfo(index: Int, ballSpeed: Int, rounds: Int, name: String, ready: Bool){
         var r = 0

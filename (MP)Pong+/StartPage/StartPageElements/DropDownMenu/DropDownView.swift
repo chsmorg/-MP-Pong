@@ -65,7 +65,7 @@ struct DropDownView: View {
                         
                             
                         }
-                    }//.frame(width: UIScreen.main.bounds.width-40, height: UIScreen.main.bounds.height/8)
+                    }
                 }
                 
                      
@@ -77,42 +77,3 @@ struct DropDownView: View {
        }
    }
 }
-
-
-//HStack(spacing: 1) {
-//    Text (lobbyType == 1 ? "Multiplayer": "Singleplayer")
-//          .fontWeight(.bold)
-//          .foregroundColor(.white)
-//          .frame(width: 130)
-//     Image(systemName: expand ? "chevron.up" : "chevron.down")
-//          .resizable()
-//          .frame (width: 13, height: 6)
-//          .foregroundColor(.white)
-// }.onTapGesture{
-//     withAnimation(.spring()){
-//          self.expand.toggle()
-//     }
-//
-// }
-//
-//    if expand {
-//        VStack{
-//            GameTypeToggle(lobbyType: $lobbyType)
-//            if(lobbyType == 1){
-//                Text("Server Connect:").font(.system(size:13, weight: .regular, design: .rounded))
-//                    .foregroundColor(Color(UIColor.lightGray))
-//                withAnimation(.spring()){
-//                    ServerTypeToggle(serverType: $serverType)
-//                }
-//
-//                if(serverType == 3){
-//                    withAnimation(.spring()){
-//                     CustomIP(customIP: $customServer)
-//                    }
-//                }
-//
-//            }
-//
-//        }
-//
-//}

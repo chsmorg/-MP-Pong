@@ -31,7 +31,7 @@ struct PlayerSprite: View {
             }
  
     var body: some View {
-        Circle().fill(.radialGradient(Gradient(colors: [self.player.player == 1 ? .green : .red, .white]), center: .center, startRadius: 5, endRadius: 50))
+        Circle().fill(.radialGradient(Gradient(colors: [.green, .white]), center: .center, startRadius: 5, endRadius: 50))
             .frame(width: 60, height: 60)
             .position(player.position)
             .gesture(
@@ -39,7 +39,13 @@ struct PlayerSprite: View {
             ).onAppear(){
                 side = bounds.height/2+30
             }.onReceive(self.states.timer){ _ in
+                if self.player.host{
                     physics.update()
+                }
+                else{
+                    physics.calcVelocity()
+                }
+                    
                 
             }
     }
