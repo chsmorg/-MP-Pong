@@ -20,6 +20,7 @@ struct HostGameLobbyView: View {
     @State var joined = false
     @State var gameReady = false
     @State var gameStart = false
+    @State var offset = -bounds.width
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
             ZStack{
@@ -33,7 +34,12 @@ struct HostGameLobbyView: View {
                         GameLobbyInfoView(states: states, screen: $lobbyScreen)
                         ScrollView([], showsIndicators: false){
                             ForEach(0...states.playerList.count-1, id: \.self) { index in
-                                PlayerView(client: states.server, player: states.playerList[index], states: states)
+                                PlayerView(client: states.server, player: states.playerList[index], states: states).offset(x: self.offset)
+                                    .onAppear(){
+                                    withAnimation(.spring().speed(0.6)){
+                                        self.offset = 0
+                                    }
+                                }
                             }
                         }
                         GameOptionsView(states: states, client: states.server, player: states.player).padding()

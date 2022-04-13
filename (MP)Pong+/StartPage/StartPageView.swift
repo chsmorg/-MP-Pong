@@ -15,7 +15,10 @@ struct StartPageView: View {
     @State var lobbyType: Int = 1
     @State var serverType: Int = 1
     @State var customServer: String = ""
-    @State var settingsVis = true
+    @State var haptics: Bool = true
+    @State var sound: Bool = true
+    @State var music: Bool = true
+    @FocusState private var isFocused: Bool
     @State var statusText = ""
     @State var lobby = false
     @State var connected = false
@@ -24,8 +27,8 @@ struct StartPageView: View {
         NavigationView{
                 VStack{
                     ZStack{
-                        DropDownView(lobbyType: $lobbyType, serverType: $serverType, customServer: $customServer).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3).opacity(settingsVis ? 1 : 0)
-                        DropDownServerView(lobbyType: $lobbyType, serverType: $serverType, customServer: $customServer).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3).opacity(settingsVis ? 1 : 0)
+                        DropDownView(haptics: $haptics, sound: $sound, music: $music).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3).opacity(!isFocused ? 1 : 0)
+                        DropDownServerView(lobbyType: $lobbyType, serverType: $serverType, customServer: $customServer).position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2.3).opacity(!isFocused ? 1 : 0)
                         
                         AnimationView().position(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/7)
                         VStack{
@@ -51,19 +54,14 @@ struct StartPageView: View {
                                 .disableAutocorrection(true)
                                 .foregroundColor(.white)
                                 .onSubmit{
-                                    self.settingsVis = true
                                     if(!name.isEmpty && name.count >= 3 && name.count <= 8){
                                         validName = true
                                     }
                                     else{
                                         validName = false
                                     }
-                                }.onTapGesture {
-                                    withAnimation(.spring()){
-                                        self.settingsVis = false
-                                    }
-                                    
-                                }
+                                }.focused($isFocused)
+                                
                             
                             
                             HStack{
