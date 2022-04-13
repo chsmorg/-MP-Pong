@@ -43,7 +43,11 @@ struct PlayerSprite: View {
                     physics.update()
                 }
                 else{
-                    physics.calcVelocity()
+                    player.velocity = physics.calcVelocity()
+                    if(states.joinedGame != nil){
+                        states.server.emitPlayerSpriteInfo(index: states.joinedGame!, posX: bounds.width - self.player.position.x , posY: bounds.height - self.player.position.y, velX: player.velocity.x * -1 , velY: player.velocity.y * -1)
+                    }
+                    
                 }
                     
                 

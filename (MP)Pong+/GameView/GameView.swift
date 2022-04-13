@@ -37,10 +37,25 @@ struct GameView: View {
                  .frame(height: 1)
                  .foregroundColor(.secondary)
                  .position(x: bounds.width/2, y: bounds.height/2)
-        
-            PlayerSprite(states: states, player: states.playerList[0], physics: Physics(states: states, player: states.playerList[0]))
             
-            BallSprite(states: states, physics: Physics(states: states))
+            if states.player.host{
+                PlayerSprite(states: states, player: states.playerList[0], physics: Physics(states: states, player: states.playerList[0]))
+                
+                BallSprite(states: states, physics: Physics(states: states))
+                if states.server.connectedPlayer != nil {
+                    ConnectedPlayerSprite(player: states.playerList[1], physics: Physics(states: states, player: states.player), states: states)
+                }
+            }
+            else{
+                PlayerSprite(states: states, player: states.playerList[0], physics: Physics(states: states, player: states.playerList[0]))
+                ConnectedBallSprite(states: states)
+                if states.server.connectedPlayer != nil {
+                    ConnectedPlayerSprite(player: states.playerList[1], physics: Physics(states: states, player: states.player), states: states)
+                }
+                
+            }
+        
+            
             
             Text(String(timerText)).opacity(self.states.roundEnd ? 1 : 0).font(Font.system(size: 40).monospacedDigit()).padding().position(x: bounds.width/2, y: bounds.height/2).foregroundColor(.white)
             

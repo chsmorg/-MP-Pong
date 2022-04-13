@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 import SwiftUI
 import SocketIO
 
@@ -158,6 +159,17 @@ final class Client: ObservableObject{
                 }
             }
         }
+        socket.on("ConnectedPlayerInfo"){ [weak self](data, ack) in
+            if let data = data[0] as? [String: [Double]],
+               let pData = data["CPinfo"] {
+                DispatchQueue.main.async {
+                   let pos = CGPoint(x: pData[0], y: pData[1])
+                   let vel = simd_float2(x: Float(pData[2]), y: Float(pData[2]))
+                    self?.connectedPlayer?.velocity = vel
+                    self?.connectedPlayer?.position = pos
+                }
+            }
+        }
         
         
         socket.on("position"){ [weak self](data, ack) in
@@ -183,6 +195,7 @@ final class Client: ObservableObject{
         self.socket.emit("CheckPlayers")
         self.socket.emit("CheckServers")
     }
+    
     func reset(){
         self.connected = false
         self.connectedPlayer = nil
@@ -233,6 +246,13 @@ final class Client: ObservableObject{
             r = 1
         }
         self.socket.emit("ready", [index, r])
+    }
+    
+    //in game data
+    
+    func emitPlayerSpriteInfo(index: Int, posX: Double, posY: Double, velX: Float, velY: Float){
+        let arr = [posX,posY, Double(velX),Double(velY)]
+        self.socket.emit("ConnectedPlayerInfo", [index, arr])
     }
     
                           

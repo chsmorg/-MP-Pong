@@ -44,10 +44,6 @@ class ConnectedPlayer: ObservableObject{
     func resetScore(){
         self.score = 0
     }
-    func setBot(){
-        self.isBot = true
-        self.setReady()
-    }
     func setPlayer(){
         self.isBot = false
         self.unReady()

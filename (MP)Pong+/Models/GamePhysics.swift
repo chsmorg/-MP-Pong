@@ -40,9 +40,16 @@ class Physics: ObservableObject{
     
     
     func update(){
-        if(!states.roundEnd && !states.gameEnd){
+        if(!states.roundEnd && !states.gameEnd && states.playerList.count > 1){
             player.velocity = calcVelocity()
-            if checkCollision(ballPosition: self.states.ballPosition){resolveCollision()}
+            if checkCollision(ballPosition: self.states.ballPosition, player:states.playerList[0]){
+                resolveCollision(player: states.playerList[0])
+                
+            }
+            if checkCollision(ballPosition: self.states.ballPosition, player: states.playerList[1]){
+                resolveCollision(player: states.playerList[1])
+                
+            }
         }
         else{player.position = self.player.startingPosition}
     }
@@ -75,19 +82,19 @@ class Physics: ObservableObject{
 
     }
     
-    func checkCollision(ballPosition: CGPoint) -> Bool{
-        let dx = (self.player.position.x + 30) - (ballPosition.x + 30);
-        let dy = (self.player.position.y + 30) - (ballPosition.y + 30);
+    func checkCollision(ballPosition: CGPoint, player: ConnectedPlayer) -> Bool{
+        let dx = (player.position.x + 30) - (ballPosition.x + 30);
+        let dy = (player.position.y + 30) - (ballPosition.y + 30);
         let distance = sqrt(dx*dx + dy*dy)
         if(distance<60){ return true }
         return false
         
     }
     
-    func resolveCollision(){
-        let v1 = self.player.velocity
+    func resolveCollision(player: ConnectedPlayer){
+        let v1 = player.velocity
         let v2 = self.states.ballVelocity
-        let p1 = self.player.position
+        let p1 = player.position
         let p2 = self.states.ballPosition
         let m1: Float  = 30
         let m2: Float = 25
@@ -178,7 +185,7 @@ class Physics: ObservableObject{
             
     
             if(states.playerList[0].score == states.rounds){
-                states.endGame(winner: 1)
+                states.endGame(winner: true)
             }
         }
     }
@@ -194,7 +201,7 @@ class Physics: ObservableObject{
             //Haptics.shared.notify(.error)
             
             if(states.playerList[1].score == states.rounds){
-                states.endGame(winner: 2)
+                states.endGame(winner: false)
             }
         }
     }
