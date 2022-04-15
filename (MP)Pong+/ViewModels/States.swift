@@ -23,7 +23,7 @@ class States: ObservableObject {
     @Published var gameEnd = false
     @Published var roundEnd = false
     //game timer
-    let timer =  Timer.publish(every: 0.025, on: .main, in: .common).autoconnect()
+    let timer =  Timer.publish(every: 0.001, on: .main, in: .common).autoconnect()
     //ball physics 
     @Published var ballPosition = CGPoint(x: 0, y: 0)
     @Published var ballVelocity =  simd_float2(x: 0, y: 0)
