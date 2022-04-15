@@ -57,7 +57,7 @@ final class Client: ObservableObject{
         switch serverType{
         case 1:
             //192.168.0.19
-            manager = SocketManager(socketURL: URL(string:"ws://35.129.56.107:11328")!, config: [.log(true), .compress])
+            manager = SocketManager(socketURL: URL(string:"ws://192.168.1.143:11328")!, config: [.log(true), .compress])
         case 2:
             //35.129.56.107
             manager = SocketManager(socketURL: URL(string:"ws:localhost//:11328")!, config: [.log(true), .compress])
