@@ -179,7 +179,7 @@ class Physics: ObservableObject{
           20)){
            
              states.ballPosition = CGPoint(x: bounds.width/2, y: bounds.height/2.5)
-             states.endRound(scored: 1)
+             states.endRound(scored: true)
             // Haptics.shared.notify(.success)
              
             
@@ -197,7 +197,7 @@ class Physics: ObservableObject{
           20)){
            
             states.ballPosition = CGPoint(x: bounds.width/2, y: bounds.height/1.5)
-            states.endRound(scored: 2)
+            states.endRound(scored: false)
             //Haptics.shared.notify(.error)
             
             if(states.playerList[1].score == states.rounds){

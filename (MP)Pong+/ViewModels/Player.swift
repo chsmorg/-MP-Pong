@@ -76,6 +76,7 @@ class ConnectedPlayer: ObservableObject{
             self.streak = 0
             self.score = 0
         }
+        self.gamesPlayed += 1
     }
     func setStartingPositioning(point: CGPoint){
         self.startingPosition = point

@@ -41,6 +41,7 @@ struct PlayerSprite: View {
             }.onReceive(self.states.timer){ _ in
                 if self.player.host{
                     physics.update()
+                    states.server.emitGamePositions(index: states.joinedGame ?? -1, player: self.player.position, ball: self.states.ballPosition, bounds: bounds)
                 }
                 else{
                     player.velocity = physics.calcVelocity()

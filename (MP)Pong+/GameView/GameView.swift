@@ -49,6 +49,12 @@ struct GameView: View {
             else{
                 PlayerSprite(states: states, player: states.playerList[0], physics: Physics(states: states, player: states.playerList[0]))
                 ConnectedBallSprite(states: states)
+                    .onChange(of: states.server.connectedBallPosition){ _ in
+                        withAnimation(){
+                            states.ballPosition = states.server.connectedBallPosition
+                        }
+                        
+                    }
                 if states.server.connectedPlayer != nil {
                     ConnectedPlayerSprite(player: states.playerList[1], physics: Physics(states: states, player: states.player), states: states)
                 }
@@ -67,16 +73,20 @@ struct GameView: View {
             .onAppear(){
             states.playerList[0].setStartingPositioning(point: player1Start)
             states.playerList[1].setStartingPositioning(point: player2Start)
-            states.roundEnd = true
               
         }.background(.radialGradient(Gradient(colors: [.indigo, .blue, .purple]), center: .center, startRadius: 50, endRadius: 500)).onReceive(self.states.timer){ _ in
+            if(self.states.gameEnd){self.presentationMode.wrappedValue.dismiss()}
             if(self.states.server.connectedPlayer == nil){
                 states.exitGame()
                 states.player.ready = false
             }
-            if(self.states.roundEnd){
-                if(self.states.gameEnd){self.presentationMode.wrappedValue.dismiss()}
+            if(self.states.server.roundEnd){
+                if !states.player.host{
+                    self.states.player.score = self.states.server.score
+                    self.states.player.reset()
+                }
                 self.roundTimer -= 1
+                self.states.roundEnd = true
                 timerText = Int(self.roundTimer/40)+1
                 if(self.roundTimer <= 0){
                     states.newRound()

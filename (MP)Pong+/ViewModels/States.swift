@@ -53,21 +53,14 @@ class States: ObservableObject {
         
     }
     
-    func restartGame(){
-        self.roundEnd = true
-        self.ballVelocity = simd_float2(x: 0, y: 0)
-        
-        for p in self.playerList{
-            p.resetScore()
-            p.reset()
-        }
-    }
     func setBallPosition(point: CGPoint){
         self.ballPosition = point
     }
     func exitGame(){
         self.server.gameStart = false
-        self.endRound(scored: 0)
+        self.server.roundEnd = true
+        self.server.score = 0
+        self.endRound(scored: false)
         self.gameEnd = true
         self.player.unReady()
     }
@@ -95,22 +88,24 @@ class States: ObservableObject {
         
     }
     func newRound(){
+        self.server.roundEnd = false
         self.roundEnd = false
     }
-    func endRound(scored: Int){
-        self.roundEnd = true
-        self.ballVelocity = simd_float2(x: 0, y: 0)
-        for p in self.playerList{
-            if(p.player == scored){
-                p.scored()
+    func endRound(scored: Bool){
+        if(self.joinedGame != nil && self.server.connectedPlayer != nil){
+            self.server.endRound(scored: scored, index: self.joinedGame!)
+            if scored{
+                self.playerList[0].scored()
             }
-            p.reset()
+            else{
+                self.playerList[1].scored()
+            }
         }
+        self.player.reset()
+        self.ballVelocity = simd_float2(x: 0, y: 0)
     }
     func endGame(winner: Bool){
-        self.gameEnd = true
-        self.server.gameStart = false
-        self.player.unReady()
+        self.exitGame()
         self.player.gameWon(win: winner)
     }
     

@@ -34,8 +34,11 @@ final class Client: ObservableObject{
     @Published var gameConnected = false
     ///current player connected to
     @Published var connectedPlayer: ConnectedPlayer? = nil
+    @Published var connectedBallPosition: CGPoint = CGPoint(x: 0, y: 0)
     
     @Published var gameStart = false
+    @Published var roundEnd = true
+    @Published var score = 0
    
     @Published var manager: SocketManager
     
@@ -112,9 +115,32 @@ final class Client: ObservableObject{
                 }
             }
         }
+        socket.on("endRound"){ [weak self](data, ack) in
+            if let data = data[0] as? [String: [Bool]],
+               let scored = data["round"] {
+                DispatchQueue.main.async {
+                    self?.roundEnd = true
+                    if scored[0]{
+                        self?.score += 1
+                    }
+                    else{
+                        if self?.connectedPlayer != nil{
+                            self?.connectedPlayer!.scored()
+                        }
+                        
+                    }
+                    
+                }
+            }
+        }
         socket.on("GameStartAck"){[weak self] _,_ in
             DispatchQueue.main.async {
                 self?.gameStart = true
+            }
+        }
+        socket.on("endRoundAck"){[weak self] _,_ in
+            DispatchQueue.main.async {
+                self?.roundEnd = true
             }
         }
         socket.on("PlayerNum"){ [weak self](data, ack) in
@@ -167,6 +193,17 @@ final class Client: ObservableObject{
                    let vel = simd_float2(x: Float(pData[2]), y: Float(pData[2]))
                     self?.connectedPlayer?.velocity = vel
                     self?.connectedPlayer?.position = pos
+                }
+            }
+        }
+        socket.on("GamePositions"){ [weak self](data, ack) in
+            if let data = data[0] as? [String: [Double]],
+               let positions = data["Ginfo"] {
+                DispatchQueue.main.async {
+                   let ppos = CGPoint(x: positions[0], y: positions[1])
+                   let bpos = CGPoint(x: positions[2], y: positions[3])
+                    self?.connectedPlayer?.position = ppos
+                    self?.connectedBallPosition = bpos
                 }
             }
         }
@@ -225,6 +262,9 @@ final class Client: ObservableObject{
     func startGame(start: Bool, index: Int){
         self.socket.emit("GameStart", [index, start])
     }
+    func endRound(scored: Bool, index: Int){
+        self.socket.emit("endRound", [index, scored])
+    }
     func disconnect(){
         self.socket.disconnect()
     }
@@ -253,6 +293,13 @@ final class Client: ObservableObject{
     func emitPlayerSpriteInfo(index: Int, posX: Double, posY: Double, velX: Float, velY: Float){
         let arr = [posX,posY, Double(velX),Double(velY)]
         self.socket.emit("ConnectedPlayerInfo", [index, arr])
+    }
+    
+    func emitGamePositions(index: Int, player: CGPoint, ball: CGPoint, bounds: CGRect){
+        if(self.gameStart){
+            self.socket.emit("GamePositions", [index, [bounds.width - player.x, bounds.height - player.y, bounds.width - ball.x, bounds.height - ball.y]])
+        }
+        
     }
     
                           

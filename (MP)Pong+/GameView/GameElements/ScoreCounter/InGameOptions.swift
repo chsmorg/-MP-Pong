@@ -41,7 +41,6 @@ struct InGameOptions: View {
                      }).padding()
                     
                     Button(action: {
-                            states.restartGame()
                             states.setBallPosition(point: ballStart)
                             self.expand = false
                         
