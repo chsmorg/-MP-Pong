@@ -80,7 +80,10 @@ struct GameView: View {
                 states.exitGame()
                 states.player.ready = false
             }
-            if(self.states.server.roundEnd){
+            if(self.states.server.gameEnd){
+                states.endGame(winner: self.states.server.gameWon)
+            }
+            if(self.states.server.roundEnd && self.states.server.gameStart){
                 if !states.player.host{
                     self.states.player.score = self.states.server.score
                     self.states.player.reset()

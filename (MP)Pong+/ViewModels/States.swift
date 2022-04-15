@@ -63,10 +63,16 @@ class States: ObservableObject {
         self.endRound(scored: false)
         self.gameEnd = true
         self.player.unReady()
+        self.server.gameWon = false
+        self.server.gameEnd = false
+        if self.playerList.count == 2{
+            playerList[1].gameWon(win: false)
+        }
     }
     func reset(){
         self.gameEnd = false
         self.roundEnd = false
+        self.server.resetGameElements()
     }
     func addPlayer(player: ConnectedPlayer){
         self.playerList.append(player)
@@ -106,7 +112,11 @@ class States: ObservableObject {
     }
     func endGame(winner: Bool){
         self.exitGame()
-        self.player.gameWon(win: winner)
+        if(self.server.connectedPlayer != nil && self.player.host){
+            self.server.gameEnd(winner: !winner, index: self.joinedGame!)
+        }
+        self.playerList[0].gameWon(win: winner)
+        self.playerList[1].gameWon(win: !winner)
     }
     
     

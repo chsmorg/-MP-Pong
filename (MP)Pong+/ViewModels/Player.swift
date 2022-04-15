@@ -77,6 +77,8 @@ class ConnectedPlayer: ObservableObject{
             self.score = 0
         }
         self.gamesPlayed += 1
+        self.resetScore()
+        self.reset()
     }
     func setStartingPositioning(point: CGPoint){
         self.startingPosition = point

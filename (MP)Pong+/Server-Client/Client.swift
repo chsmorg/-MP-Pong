@@ -38,6 +38,8 @@ final class Client: ObservableObject{
     
     @Published var gameStart = false
     @Published var roundEnd = true
+    @Published var gameWon = false
+    @Published var gameEnd = false
     @Published var score = 0
    
     @Published var manager: SocketManager
@@ -112,6 +114,15 @@ final class Client: ObservableObject{
                let start = data["start"] {
                 DispatchQueue.main.async {
                     self?.gameStart = start[0]
+                }
+            }
+        }
+        socket.on("GameEnd"){ [weak self](data, ack) in
+            if let data = data[0] as? [String: [Bool]],
+               let won = data["winner"] {
+                DispatchQueue.main.async {
+                    self?.gameWon = won[0]
+                    self?.gameEnd = true
                 }
             }
         }
@@ -265,6 +276,9 @@ final class Client: ObservableObject{
     func endRound(scored: Bool, index: Int){
         self.socket.emit("endRound", [index, scored])
     }
+    func gameEnd(winner: Bool, index: Int){
+        self.socket.emit("GameEnd", [index, winner])
+    }
     func disconnect(){
         self.socket.disconnect()
     }
@@ -300,6 +314,16 @@ final class Client: ObservableObject{
             self.socket.emit("GamePositions", [index, [bounds.width - player.x, bounds.height - player.y, bounds.width - ball.x, bounds.height - ball.y]])
         }
         
+    }
+    func resetGameElements(){
+        if(self.connectedPlayer != nil){
+            self.connectedPlayer?.reset()
+            self.connectedPlayer?.resetScore()
+        }
+        self.score = 0
+        self.gameEnd = false
+        self.roundEnd = true
+        self.gameWon = false
     }
     
                           
